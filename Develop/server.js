@@ -49,6 +49,7 @@ app.post("/api/notes", function (req, res) {
     res.json(note);
 });
 
+//DELETE
 app.delete("/api/notes/:id", async function (req, res) {
     try {
     const { id } = req.params;
@@ -67,7 +68,15 @@ app.delete("/api/notes/:id", async function (req, res) {
     }
 });
 
+//load notes.html
+app.get("/notes", function(req, res){
+    res.sendFile(path.join(__dirname + "/public/notes.html"))
+});
 
+//PUT GET * HERE
+app.get("*", function (req, res) {
+    res.sendFile(__dirname + "/public/index.html")
+});
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT}`)
 );
