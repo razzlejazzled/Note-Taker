@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path")
 const express = require("express");
 const logger = require("morgan")
 const { v4: uuidv4 } = require("uuid")
@@ -8,11 +9,12 @@ const PORT = 8080;
 //middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"))
 app.use(logger("dev"));
 
 app.get("/", function (req, res) {
 
-    res.sendFile(_dirname + "/public/index.html");
+    res.sendFile(__dirname + "/public/index.html");
 
 });
 
@@ -54,12 +56,13 @@ app.delete("/api/notes/:id", async function (req, res) {
     try {
     const { id } = req.params;
     
-    const data = await fs.promises.readFile(_dirname + "/db/db.json", utf8);
+    
+    const data = await fs.promises.readFile(__dirname + "/db/db.json", "utf8");
 
     let notes = JSON.parse(data);
 
     notes = notes.filter((note) => note.id !== id);
-
+        console.log(notes)
     const stringifiedData = JSON.stringify(notes, null, 2);
 
     await fs.promises.writeFile(__dirname + "/db/db.json", stringifiedData)

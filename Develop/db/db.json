@@ -1,1 +1,7 @@
-[{"id":"jklasd","title":"Test Title","text":"Test text"}]
+[
+  {
+    "id": "jklasd",
+    "title": "Test Title",
+    "text": "Test text"
+  }
+]
