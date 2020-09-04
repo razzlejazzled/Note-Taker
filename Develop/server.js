@@ -43,12 +43,12 @@ app.post("/api/notes", function (req, res) {
         const stringifiedData = JSON.stringify(notes, null, 2);
 
         fs.writeFile(__dirname + "/db/db.json", stringifiedData, function () {
-            res.json(note);
+           res.json(note);
         });
     });
 
 
-    res.json(note);
+   
 });
 
 //DELETE
@@ -66,6 +66,7 @@ app.delete("/api/notes/:id", async function (req, res) {
     const stringifiedData = JSON.stringify(notes, null, 2);
 
     await fs.promises.writeFile(__dirname + "/db/db.json", stringifiedData)
+        res.json(true);
     } catch (err){
         res.status(500).end();
     }
